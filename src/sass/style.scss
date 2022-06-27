@@ -1,0 +1,45 @@
+@import 'libs/bootstrap-reboot.min';
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800&display=swap');
+
+@import 'base/variables';
+
+@import 'blocks/main';
+@import 'blocks/about';
+@import 'blocks/buttons';
+@import 'blocks/circle';
+@import 'blocks/animation';
+@import 'blocks/carusel';
+
+
+* {
+    font-family: 'League Spartan', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #E5E5E5;
+    overflow-x: hidden;
+    ul {
+        list-style-type: none;
+    }
+}
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 36px;
+    color: $second-color;
+}
+.text {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 170%;
+    color: #000C24;
+}
+

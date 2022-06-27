@@ -1,0 +1,231 @@
+/* ================ */
+/*       Slider     */
+/* ================ */
+
+
+  
+/* mixins */
+@mixin transition($transition...) {
+    -webkit-transition: $transition;
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    transition:         $transition;
+}
+
+@mixin transform($transform...) {
+    -webkit-transform: $transform;
+    -moz-transform:    $transform;
+    -o-transform:      $transform;
+    transform:         $transform;
+}
+  
+  
+/* SLIDER */
+$slider-color: #263238;
+$slide-count: 5; 
+
+#slider {
+    position: relative; 
+                               
+    input {
+        display: none;
+    }
+}
+  
+  /* Slider Setup */
+  
+#slider {
+    @for $i from 1 through $slide-count {
+        #slide#{$i}:checked ~ .slides .inner {
+            margin-left: -(($i - 1) * 100%); 
+        }
+    }
+    
+    .overflow {
+        width: 100%;
+        overflow: hidden;
+    }
+    
+    .inner {
+        width: $slide-count * 100%;
+        line-height: 0;
+    }
+    
+    .slide { 
+        position: relative; 
+        width: 100% / $slide-count;
+        float: left;      
+        img {
+            width: 475px;
+            height: 620px;
+            object-fit: cover;
+            object-position: 80%;
+            filter: grayscale(1);
+            transition: 0.5s;
+            &:hover {
+                filter: grayscale(0);
+            }
+        }  
+    }
+}
+  
+  /* Control Setup */
+  
+  #slider {
+      /* ARROWS */
+      #controls {
+          position: absolute;
+          top: calc(475px - 40%);
+          left: 41.5%;
+          @include transform(translate(-50%, -41.50%));   
+          width: 450px; 
+          box-sizing: border-box;
+          label { 
+              position: relative;
+              display: none;
+              width: 8%;
+              padding-top: 6%; /* height same as width */
+              border-top: 0.9vw solid $second-color;
+              border-left: 0.9vw solid $second-color;  
+              opacity: 0.3;
+              &:hover {
+                  opacity: 0.8;
+                  cursor: pointer;
+              }            
+              &:after {
+                  content: '';
+                  position: absolute; 
+                  top: 50%;
+                  left: 50%;
+                  @include transform(translate(-50%, -50%));  
+                  display: inline-block;
+                  width: 400%;
+                  height: 400%;
+              }
+          }
+      }
+      
+      /* RIGHT ARROW */
+      #slide#{$slide-count}:checked ~ #controls label:nth-child(1) {
+          display: block;
+          float: right;
+          @include transform(rotate(135deg));
+      }
+      
+      @for $i from 1 through ($slide-count - 1) {
+          #slide#{$i}:checked ~ #controls label:nth-child(#{$i + 1}) {
+              display: block;
+              float: right;
+              @include transform(rotate(135deg));
+          }
+      }
+      
+      /* LEFT ARROW */
+      #slide1:checked ~ #controls label:nth-child(#{$slide-count}){
+          display: block;
+          float: left;
+          @include transform(rotate(-45deg));
+      }
+      
+      @for $i from 1 through ($slide-count - 1) {
+          #slide#{$i + 1}:checked ~ #controls label:nth-child(#{$i}) {
+              display: block;
+              float: left;
+              @include transform(rotate(-45deg));
+          }
+      }
+      
+      /* ACTIVE DOTTS */
+      #active {
+          position: absolute;
+          left: 42%;
+          top: 20px;
+          @include transform(translate(-50%, -50%)); 
+          width: 100%;
+          text-align: center;          
+          label {
+              display: inline-block;
+              width: 3%;
+              padding-top: 3%; /* height same as width */
+              border-radius: 50%;
+              margin: 1%;  
+              background: rgba($slider-color, 0.5);
+              vertical-align: middle;
+              
+              &:hover {
+                  background: rgba($slider-color, 0.3);
+                  box-shadow: 0 0 0 0.2vw $slider-color;
+                  cursor: pointer; 
+              }
+          }
+      }
+      
+      @for $i from 1 through $slide-count {
+          #slide#{$i}:checked ~ #active label:nth-child(#{$i}) {
+              background: $slider-color;
+              box-shadow: 0 0 0 0.2vw $slider-color; 
+          }
+      }
+  }
+  
+  
+  /* Info Box */
+  
+  #slider {
+      .info {
+          line-height: 20px;
+          position: absolute;
+          top: 75%; 
+          left: 50%;  
+          @include transform(translate(-50%, -50%)); 
+          font-style: italic;
+          font-size: 1rem;
+          padding: 30px 30px;
+          opacity: 0;
+          color: #000;
+          text-align: center;
+          
+          h3 {
+              color: rgb(231, 19, 19);
+              margin: 0 0 5px;
+              font-weight: normal;
+              font-size: 1.5rem;
+              font-style: normal;
+          }
+      }
+  }
+  
+  /* Animation */
+  
+  #slider {
+      @include transition(all 0.5s ease-out);
+      
+      .inner {
+          @include transition(all 0.8s cubic-bezier(0.770, 0.000, 0.175, 1.000)); /* easeInOutQuart */
+      }
+      
+      #controls label{
+          @include transition(opacity 0.2s ease-out);
+      }
+      
+      @for $i from 1 through $slide-count {
+          #slide#{$i}:checked ~ .slides .inner > div:nth-child(#{$i}) .info {
+              opacity: 1;
+              @include transition(all 1s ease-out 0.6s); 
+          }
+      }
+      
+      .info, #controls, .slides, #active, #active label, .info h3 {
+          @include transition(all 0.5s ease-out);
+      }
+  }
+  
+  @media only screen and (max-width: 500px) {
+      #slider .info {
+          opacity: 0 !important;
+      }
+  }
+  
+  /* ================ */
+  /*    END Slider    */
+  /* ================ */

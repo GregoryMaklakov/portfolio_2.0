@@ -1,0 +1,173 @@
+.bigs {
+    display: flex;
+    flex-direction: row;
+}
+
+.headline {
+    font-size: 2rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+  
+.circle-big {
+    position: relative;
+    width: 114px;
+    height: 114px;
+    margin: 30px auto 25px auto;
+}
+  
+.circle-big svg {
+    width: 114px;
+    height: 114px;
+}
+
+.circle-big .bg {
+    fill: none;
+    stroke-width: 10px;
+    stroke: #343035;
+}
+
+.circle-big .progress {
+    fill: none;
+    stroke-width: 10px;
+    stroke: $second-color;
+    stroke-linecap: round;
+    stroke-dasharray: 326.56;
+    stroke-dashoffset: 60;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    animation: big 1.5s ease-in-out;
+}
+.circle-big .progress.two {
+    fill: none;
+    stroke-width: 10px;
+    stroke: $second-color;
+    stroke-linecap: round;
+    stroke-dasharray: 326.56;
+    stroke-dashoffset: 60;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    animation: big 2.5s ease-in-out;
+}
+
+.circle-big .text {
+    position: absolute;
+    width: 100%;
+    top: 37px;
+    font-size: 24px;
+    text-align: center;
+    font-weight: 400;
+    line-height: 25px;
+}
+
+.circle-big .text .small {
+    font-size: 14px;
+    color: $main-color;
+}
+
+.circles-small {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
+    width: 400px;
+    height: 80px;
+    text-align: center;
+}
+
+.circle-small {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 20px;
+}
+
+.circle-small svg {
+    width: 80px;
+    height: 80px;
+}
+//......In profress.........///
+
+/* .circle-small .bg {
+    fill: none;
+    stroke-width: 6px;
+    stroke: #343035;
+} */
+
+/* .circle-small .progress {
+    fill: none;
+    stroke-width: 6px;
+    stroke: $second-color;
+    stroke-linecap: round;
+    stroke-dasharray: 232.36;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+} */
+
+/* .circle-small .progress.one {
+    stroke-dashoffset: 220;
+    animation: one 2.5s ease-in-out, appear 5s;
+}
+
+.circle-small .progress.two {
+    stroke-dashoffset: 140;
+    animation: two 3.5s ease-in-out, appear 2s;
+} */
+
+.circle-small .text {
+    font-size: 15px;
+    text-align: center;
+    font-weight: 400;
+    line-height: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+}
+
+.circle-small .text .small {
+    font-size: 16px;
+}
+//............Circle pulsing........//
+
+.pulse::after,
+.pulse::before {
+  content: '';
+  position: absolute;
+  border: 2px solid $main-color;
+  left: -20px;
+  opacity: 0;
+  right: -20px;
+  top: -20px;
+  bottom: -20px;
+  border-radius: 50%;
+  animation: pulse 2.5s linear infinite;
+}
+
+.pulse {
+    position: relative; // Нужно будет в будущем, для позиционирования эффекта
+    text-align: center; 
+    padding: 20px; // Отступ можете подобрать свой.
+    border-radius: 50%; // Делаем икноку круглой
+    background: $second-color;
+    width: 80px;
+    height: 80px;
+}
+
+.pulse::before {
+    content: ''; // Нужно для отображения псевдокласса
+    position: absolute;
+    border: 2px solid $second-color;// Ширину обводки можете выбрать сами
+    left: -20px;
+    opacity: 0;
+    right: -20px;
+    top: -20px;
+    bottom: -20px;
+    border-radius: 50%;
+    animation: pulse 2.5s linear infinite; // Указываем название анимации, время, тип, и нужно ли её повторять
+}
+.pulse::after {
+  animation-delay: 1.25s;
+}
+
